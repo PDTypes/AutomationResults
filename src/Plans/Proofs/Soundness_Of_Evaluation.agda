@@ -40,7 +40,7 @@ open ActionDescription
 
 sound : ∀{w σ M Γ f N}
       → WfHandler Γ σ
-      → Γ ⊢ f ∶ M ↝ N
+      → Γ ⊢ M ↝ N ∶ f
       → w ∈⟨ M ⟩
       → execute f σ w ∈⟨ N ⟩
 sound wfσ (halt N<:M) w∈⟨M⟩ = <:-resp-∈ N<:M w∈⟨M⟩
@@ -54,7 +54,7 @@ sound {w}{σ}{M}{Γ} wfσ (seq {α}{M₁} M₁'<:M Γ⊢f∶M⊔M₂↝N) w∈�
 
 sound' : ∀{Γ f P Q σ}
        → WfHandler Γ σ
-       → Γ ⊢ f ∶ (P ↓₊) ↝ (Q ↓₊)
+       → Γ ⊢ (P ↓₊) ↝ (Q ↓₊) ∶ f
        → ∀{w} → w ⊨[ + ] P
        → execute f σ w ⊨[ + ] Q
 sound' {Γ}{f}{P}{Q}{σ} wfσ Γ⊢f∶P↓₊↝Q↓₊ {w} w⊨₊P = ↓-sound h
