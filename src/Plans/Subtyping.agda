@@ -1,4 +1,3 @@
-\begin{code}
 open import Data.List hiding (any)
 open import Data.Product
 open import Relation.Binary.PropositionalEquality
@@ -134,4 +133,3 @@ _<:?_ xs (y ∷ ys) with y ∈? xs | xs <:? ys
 ... | no  y∉xs | _         = no (λ xs<y∷ys → y∉xs (xs<y∷ys (here refl)))
 ... | _        | no xs≮ys  = no (λ xs<y∷ys → xs≮ys (weakSub _ _ _ xs<y∷ys))
 -}
-\end{code}

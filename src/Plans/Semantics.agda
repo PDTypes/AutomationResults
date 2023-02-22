@@ -1,4 +1,3 @@
-\begin{code}
 open import Data.List
 open import Data.List.Membership.Propositional
 open import Data.Product
@@ -50,4 +49,3 @@ _↓[_]_ : Form → Polarity → State → State
 P ∧ Q ↓[ t ] N = Q ↓[ t ] P ↓[ t ] N
 ¬ x ↓[ t ] N = (neg t , x) ∷ N
 atom x ↓[ t ] N = (t , x) ∷ N
-\end{code}

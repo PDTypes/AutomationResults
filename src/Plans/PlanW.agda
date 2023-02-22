@@ -1,4 +1,3 @@
-\begin{code}
 open import Relation.Binary
 open import Relation.Binary.PropositionalEquality
 open import Data.List
@@ -117,5 +116,3 @@ solver Γ halt w g with w ∈?⟨ g ⟩
 execute : Plan → ActionHandler → World → World
 execute (α ∷ f) σ w = execute f σ (σ α w)
 execute halt    σ w = w
-
-\end{code}
