@@ -11,11 +11,10 @@
 
 (defun parseDom (in)
   (cond
-   ((eq nil (car in)) (print "done"))
-   ((eq 'define (car in)) (progn (print "define") (parseDom (cdr in))))
-   ((eq :predicates (caar in)) (progn (print "predicates") (setq predicates (predicateHandler (cdr (car in)) "R")) (parseDom (cdr in))))
-   ((eq :action (caar in)) (progn (print "action")
-                                  (actionParser (cadar in) (cddar in))
+   ((eq nil (car in)) )
+   ((eq 'define (car in)) (progn (parseDom (cdr in))))
+   ((eq :predicates (caar in)) (progn (setq predicates (predicateHandler (cdr (car in)) "R")) (parseDom (cdr in))))
+   ((eq :action (caar in)) (progn (actionParser (cadar in) (cddar in))
                                   (parseDom (cdr in))))
    (t (parseDom (cdr in)))
   ))
@@ -64,25 +63,20 @@
 
   (labels ((aP (in)
         (cond
-          ((eq nil (car in)) (print "done"))
-          ((eq :parameters (car in)) (progn (print "parameters") (setq parameters (cadr in)) (aP (cdr in))))
-          ((eq :precondition (car in)) (progn (print "preconditions")
+          ((eq nil (car in)))
+          ((eq :parameters (car in)) (progn (setq parameters (cadr in)) (aP (cdr in))))
+          ((eq :precondition (car in)) (progn
 							(if (eq 'and (caadr in))
 								(setq preconditions (cdadr in))
 								(setq effect (cdr in)))
 								(aP (cdr in))))
-          ((eq :effect (car in)) (progn (print "effect")
+          ((eq :effect (car in)) (progn 
 							(if (eq 'and (caadr in))
 								(setq effect (cdadr in))
 								(setq effect (cdr in)))
 							(aP (cdr in))))
           (t (aP (cdr in))))))
   (aP act)
-
-	(print preconditions)
-	(print effect)
-
-  (print "start")
 
   ; We don't actually use effects but post state
   ; therefore we need to add all preconditions in p to effect that are not
@@ -104,8 +98,6 @@
               (setq inEffect t)))) ;)
               (when (eq nil inEffect)
                 (setq effect (cons p effect)))))
-
-	(print effect)
 
   (actionHandler actName parameters preconditions effect)
 )))

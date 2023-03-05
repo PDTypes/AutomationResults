@@ -16,15 +16,15 @@
       s)
 ))
 
-(load "domain_agda")
-(load "problem_agda")
+(load "../auto/domain_agda")
+(load "../auto/problem_agda")
 
-(print objList)
-(print init)
-(print goal)
-(print predicates)
-(print actionList)
-(print context)
+;(print objList)
+;(print init)
+;(print goal)
+;(print predicates)
+;(print actionList)
+;(print context)
 
 ;(setf (readtable-case *readtable*) :preserve)
 ;(SETQ help (READ))

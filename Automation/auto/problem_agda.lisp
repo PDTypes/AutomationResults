@@ -6,11 +6,11 @@
 ; Parse function for problems
 (defun parseProblem (in)
   (cond
-   ((eq nil (car in)) (print "done"))
-   ((eq 'define (car in)) (progn (print "define") (parseProblem (cdr in))))
-   ((eq :objects (caar in)) (progn (print "ob") (setq objList (concatenate 'string (objectConvert (cdar in) "") " : C")) (parseProblem (cdr in))))
-   ((eq :init (caar in)) (progn (print "init") (setq init (stateConvert (cdar in) "")) (parseProblem (cdr in))))
-   ((eq :goal (caar in)) (progn (print "goal") (setq goal (stateConvert (cdar (cdar in)) "")) (parseProblem (cdr in))))
+   ((eq nil (car in)) )
+   ((eq 'define (car in)) (progn (parseProblem (cdr in))))
+   ((eq :objects (caar in)) (progn (setq objList (concatenate 'string (objectConvert (cdar in) "") " : C")) (parseProblem (cdr in))))
+   ((eq :init (caar in)) (progn (setq init (stateConvert (cdar in) "")) (parseProblem (cdr in))))
+   ((eq :goal (caar in)) (progn (setq goal (stateConvert (cdar (cdar in)) "")) (parseProblem (cdr in))))
    (t (parseProblem (cdr in)))
 
   ))

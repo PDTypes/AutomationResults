@@ -1,14 +1,7 @@
-(defun stringconvert (st)
-  (let ((s st))
+(with-open-file (my-stream planfile :direction :input)
+  (setq plan (read my-stream)))
 
-  (when (eq #\? (char s 0))
-    (setq s (subseq s 1)))
-
-  (if (upper-case-p (char s 0))
-      (string-downcase s)
-      s)
-))
-
+;Now working without symbols
 (defun planToString (plan)
   (let ((st "")
          (name "")
@@ -18,7 +11,7 @@
 
   (setq name (stringconvert (string (caar plan))))
   (loop for c in (cdar plan)
-    do (setq arg (concatenate 'string arg " " (stringconvert (string (cadr c))))))
+    do (setq arg (concatenate 'string arg " " (stringconvert (string c)))))
 
   (setq st (concatenate 'string name arg " ∷ "))
 
@@ -26,7 +19,7 @@
     do (progn (setq name (stringconvert (string (car p))))
               (setq arg "")
               (loop for c in (cdr p)
-                do (setq arg (concatenate 'string arg " " (stringconvert (string (cadr c))))))
+                do (setq arg (concatenate 'string arg " " (stringconvert (string c)))))
               (setq st (concatenate 'string st name arg " ∷ "))
   ))
 
