@@ -11,3 +11,7 @@
 (print "typechecking...")
 
 (time (run-shell-command (concatenate 'string "agda " outputfile "Example.agda")))
+
+(setq agdafile outputfile)
+(setq outputfile "run")
+(load "../auto/extraction")

@@ -8,6 +8,6 @@
     (load "../auto/convert_agda")
     (load "../auto/solver")))
 
-(print "compiling...")
+(print "typechecking...")
 
 (time (run-shell-command (concatenate 'string "agda " outputfile "Example.agda")))
